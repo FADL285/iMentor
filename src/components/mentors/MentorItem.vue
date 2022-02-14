@@ -5,11 +5,18 @@
       {{ bio }}
     </h5>
     <div class="areas">
-      <span v-for="area in areas" :key="area">{{ area }}</span>
+      <base-badge
+        v-for="area in areas"
+        :key="area"
+        :type="area"
+        :title="area"
+      ></base-badge>
     </div>
     <div class="actions">
-      <router-link :to="mentorContactLink">Contact</router-link>
-      <router-link :to="mentorDetailsLink">View Details</router-link>
+      <base-button link :to="mentorContactLink" mode="flat"
+        >Contact</base-button
+      >
+      <base-button link :to="mentorDetailsLink">View Details</base-button>
     </div>
   </li>
 </template>
@@ -32,7 +39,7 @@ export default {
       return {
         name: 'mentor-contact',
         params: {
-          slug: this.username,
+          username: this.username,
         },
       };
     },
@@ -40,7 +47,7 @@ export default {
       return {
         name: 'mentor',
         params: {
-          slug: this.username,
+          username: this.username,
         },
       };
     },

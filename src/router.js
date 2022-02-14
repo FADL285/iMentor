@@ -12,9 +12,10 @@ const router = createRouter({
     { path: '/', redirect: { name: 'mentors' } },
     { path: '/mentors', name: 'mentors', component: MentorsList },
     {
-      path: '/mentors/:slug',
+      path: '/mentors/:username',
       name: 'mentor',
       component: MentorDetails,
+      props: true,
       children: [
         { path: 'contact', name: 'mentor-contact', component: ContactMentor },
       ],
@@ -25,7 +26,7 @@ const router = createRouter({
       component: MentorRegistration,
     },
     { path: '/requests', name: 'requests', component: RequestsReceived },
-    { path: '/:notFound(.*)*', component: NotFound },
+    { path: '/:notFound(.*)*', name: 'NotFound', component: NotFound },
   ],
 });
 

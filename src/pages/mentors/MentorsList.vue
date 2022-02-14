@@ -3,10 +3,10 @@
   <section>
     <base-card>
       <div class="controls">
-        <button>Refresh</button>
-        <router-link :to="{ name: 'mentor-register' }">
+        <base-button mode="outline"> Refresh </base-button>
+        <base-button link :to="{ name: 'mentor-register' }">
           Become a Mentor
-        </router-link>
+        </base-button>
       </div>
       <ul v-if="hasMentors">
         <mentor-item
@@ -26,10 +26,9 @@
 
 <script>
 import MentorItem from '@/components/mentors/MentorItem';
-import BaseCard from '@/components/ui/BaseCard';
 export default {
   name: 'MentorsList',
-  components: { BaseCard, MentorItem },
+  components: { MentorItem },
   computed: {
     filteredMentors() {
       return this.$store.getters['mentors/mentors'];
