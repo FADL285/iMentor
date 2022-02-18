@@ -1,5 +1,7 @@
 <template>
-  <section>MENTOR Registration PAGE</section>
+  <section>
+    <h2>Register as a mentor now!</h2>
+  </section>
 </template>
 
 <script>
