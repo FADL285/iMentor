@@ -30,7 +30,7 @@
         <li>
           <router-link :to="{ name: 'mentors' }"> All Mentors </router-link>
         </li>
-        <li>
+        <li v-if="!isMentor">
           <router-link :to="{ name: 'mentor-register' }">
             Become a Mentor
           </router-link>
@@ -46,6 +46,11 @@
 <script>
 export default {
   name: 'TheHeader',
+  computed: {
+    isMentor() {
+      return this.$store.getters['mentors/isMentor'];
+    },
+  },
 };
 </script>
 

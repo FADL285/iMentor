@@ -5,7 +5,9 @@ import actions from '@/store/modules/requests/actions';
 export default {
   namespaced: true,
   state() {
-    return {};
+    return {
+      requests: [],
+    };
   },
   getters,
   mutations,

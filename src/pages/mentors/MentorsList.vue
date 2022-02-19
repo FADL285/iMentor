@@ -4,7 +4,7 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline"> Refresh </base-button>
-        <base-button link :to="{ name: 'mentor-register' }">
+        <base-button v-if="!isMentor" link :to="{ name: 'mentor-register' }">
           Become a Mentor
         </base-button>
       </div>
@@ -27,6 +27,7 @@
 <script>
 import MentorItem from '@/components/mentors/MentorItem';
 import MentorFilter from '@/components/mentors/MentorFilter';
+
 export default {
   name: 'MentorsList',
   components: { MentorFilter, MentorItem },
@@ -55,6 +56,9 @@ export default {
     },
     hasMentors() {
       return this.$store.getters['mentors/hasMentors'];
+    },
+    isMentor() {
+      return this.$store.getters['mentors/isMentor'];
     },
   },
   methods: {
