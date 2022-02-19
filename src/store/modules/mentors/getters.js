@@ -7,8 +7,8 @@ export default {
   },
   isMentor(state, getters, rootState, rootGetters) {
     const mentors = getters.mentors;
-    const userId = rootGetters.userId;
+    const username = rootGetters.username;
 
-    return mentors.some((mentor) => mentor.id === userId);
+    return mentors.some((mentor) => mentor.username === username);
   },
 };

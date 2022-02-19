@@ -1,15 +1,10 @@
 export default {
   registerMentor(context, payload) {
     const mentorData = {
-      id: context.rootGetters.userId,
+      id: Math.round(new Date().getTime() * Math.random()),
       firstName: payload.first,
       lastName: payload.last,
-      username:
-        payload.first +
-        payload.last +
-        Math.round(new Date().getTime() * Math.random())
-          .toString()
-          .slice(8),
+      username: context.rootGetters.username,
       bio: payload.bio,
       description: payload.desc,
       areas: payload.areas,

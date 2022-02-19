@@ -1,8 +1,11 @@
 export default {
-  requests(state) {
-    return state.requests;
+  requests(state, getters, rootState, rootGetters) {
+    const mentorUsername = rootGetters.username;
+    return state.requests.filter(
+      (req) => req.mentorUsername === mentorUsername
+    );
   },
-  hasRequests(state) {
-    return state.requests && state.requests.length;
+  hasRequests(state, getters) {
+    return getters.requests && getters.requests.length;
   },
 };
