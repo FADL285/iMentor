@@ -10,11 +10,15 @@ const store = createStore({
   state() {
     return {
       username: 'fadl285',
+      baseUrl: 'https://find-a-mentor-f923a-default-rtdb.firebaseio.com',
     };
   },
   getters: {
     username(state) {
       return state.username;
+    },
+    baseUrl(state) {
+      return state.baseUrl;
     },
   },
 });
