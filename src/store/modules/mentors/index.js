@@ -11,7 +11,7 @@ export default {
           id: 'm1',
           firstName: 'Mohamed',
           lastName: 'Fadl',
-          username: 'fadl285',
+          username: 'mo-fadl285',
           bio: 'Computer Science Student | Front-End Developer',
           description:
             "I'm Mohamed Fadl and I've worked as a freelance web developer. Let me help you become a developer as well!",
