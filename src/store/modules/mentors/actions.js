@@ -23,7 +23,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      //  Error Handling
+      throw new Error(responseData.message || 'Failed to get data');
     }
     console.log(responseData);
 
@@ -37,6 +37,7 @@ export default {
     const responseData = await response.json();
     if (!response.ok) {
       //  Error Handling
+      throw new Error(responseData.message || 'Failed to get data');
     }
 
     const mentors = [];

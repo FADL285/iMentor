@@ -1,4 +1,7 @@
 <template>
+  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
   <mentor-filter @change-filter="setFilters"></mentor-filter>
   <section>
     <base-card>
@@ -47,6 +50,7 @@ export default {
         career: true,
       },
       isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -75,8 +79,15 @@ export default {
     },
     async loadMentors() {
       this.isLoading = true;
-      await this.$store.dispatch('mentors/loadMentors');
+      try {
+        await this.$store.dispatch('mentors/loadMentors');
+      } catch (err) {
+        this.error = err.message || 'Something went wrong';
+      }
       this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   created() {
