@@ -4,11 +4,18 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline" @click="loadMentors"> Refresh </base-button>
-        <base-button v-if="!isMentor" link :to="{ name: 'mentor-register' }">
+        <base-button
+          v-if="!isMentor && !isLoading"
+          link
+          :to="{ name: 'mentor-register' }"
+        >
           Become a Mentor
         </base-button>
       </div>
-      <ul v-if="hasMentors">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="!isLoading && hasMentors">
         <mentor-item
           v-for="mentor in filteredMentors"
           :key="mentor.id"
@@ -39,6 +46,7 @@ export default {
         android: true,
         career: true,
       },
+      isLoading: false,
     };
   },
   computed: {
@@ -65,8 +73,10 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    loadMentors() {
-      this.$store.dispatch('mentors/loadMentors');
+    async loadMentors() {
+      this.isLoading = true;
+      await this.$store.dispatch('mentors/loadMentors');
+      this.isLoading = false;
     },
   },
   created() {
