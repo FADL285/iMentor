@@ -1,39 +1,45 @@
 <template>
-  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <mentor-filter @change-filter="setFilters"></mentor-filter>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadMentors(true)">
-          Refresh
-        </base-button>
-        <base-button
-          v-if="!isMentor && !isLoading"
-          link
-          :to="{ name: 'mentor-register' }"
-        >
-          Become a Mentor
-        </base-button>
-      </div>
-      <div v-if="isLoading">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else-if="!isLoading && hasMentors">
-        <mentor-item
-          v-for="mentor in filteredMentors"
-          :key="mentor.id"
-          :first-name="mentor.firstName"
-          :last-name="mentor.lastName"
-          :username="mentor.username"
-          :bio="mentor.bio"
-          :areas="mentor.areas"
-        ></mentor-item>
-      </ul>
-      <h3 v-else class="text-center">No Mentors Found</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="An error occurred!"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
+    <mentor-filter @change-filter="setFilters"></mentor-filter>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadMentors(true)">
+            Refresh
+          </base-button>
+          <base-button
+            v-if="!isMentor && !isLoading"
+            link
+            :to="{ name: 'mentor-register' }"
+          >
+            Become a Mentor
+          </base-button>
+        </div>
+        <div v-if="isLoading">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else-if="!isLoading && hasMentors">
+          <mentor-item
+            v-for="mentor in filteredMentors"
+            :key="mentor.id"
+            :first-name="mentor.firstName"
+            :last-name="mentor.lastName"
+            :username="mentor.username"
+            :bio="mentor.bio"
+            :areas="mentor.areas"
+          ></mentor-item>
+        </ul>
+        <h3 v-else class="text-center">No Mentors Found</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>

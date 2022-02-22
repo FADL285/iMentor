@@ -1,5 +1,13 @@
 <template>
-  <h1>Not Found</h1>
+  <section>
+    <base-card>
+      <h1>Page Not Found</h1>
+      <p>
+        This page could not be found. Go to
+        <router-link :to="{ name: 'mentors' }">Home</router-link>
+      </p>
+    </base-card>
+  </section>
 </template>
 
 <script>

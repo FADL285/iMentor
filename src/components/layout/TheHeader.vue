@@ -30,11 +30,11 @@
         <li>
           <router-link :to="{ name: 'mentors' }"> All Mentors </router-link>
         </li>
-        <li v-if="!isMentor">
-          <router-link :to="{ name: 'mentor-register' }">
-            Become a Mentor
-          </router-link>
-        </li>
+        <!--        <li v-if="!isMentor">-->
+        <!--          <router-link :to="{ name: 'mentor-register' }">-->
+        <!--            Become a Mentor-->
+        <!--          </router-link>-->
+        <!--        </li>-->
         <li>
           <router-link :to="{ name: 'requests' }"> Requests</router-link>
         </li>
