@@ -14,7 +14,7 @@ export default {
     );
 
     const responseData = await response.json();
-
+    console.log(response);
     if (!response.ok) {
       //  Error Handling
       throw new Error(responseData.message || 'Failed to send request');

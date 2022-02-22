@@ -5,6 +5,7 @@ import ContactMentor from '@/pages/requests/ContactMentor';
 import MentorRegistration from '@/pages/mentors/MentorRegistration';
 import RequestsReceived from '@/pages/requests/RequestsReceived';
 import NotFound from '@/pages/NotFound';
+import UserAuth from '@/pages/auth/UserAuth';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -26,6 +27,7 @@ const router = createRouter({
       component: MentorRegistration,
     },
     { path: '/requests', name: 'requests', component: RequestsReceived },
+    { path: '/auth', name: 'auth', component: UserAuth },
     { path: '/:notFound(.*)*', name: 'NotFound', component: NotFound },
   ],
 });

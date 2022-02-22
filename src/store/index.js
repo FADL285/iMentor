@@ -9,7 +9,7 @@ const store = createStore({
   },
   state() {
     return {
-      username: 'fadl285',
+      username: 'test_user',
       baseUrl: 'https://find-a-mentor-f923a-default-rtdb.firebaseio.com',
     };
   },

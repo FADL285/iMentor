@@ -23,9 +23,8 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(responseData.message || 'Failed to get data');
+      throw new Error(responseData.message || 'Failed to send data');
     }
-    console.log(responseData);
 
     context.commit('registerMentor', {
       ...mentorData,
