@@ -25,4 +25,8 @@ html {
 body {
   margin: 0;
 }
+
+.text-center {
+  text-align: center;
+}
 </style>

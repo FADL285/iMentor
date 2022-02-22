@@ -6,7 +6,9 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadMentors"> Refresh </base-button>
+        <base-button mode="outline" @click="loadMentors(true)">
+          Refresh
+        </base-button>
         <base-button
           v-if="!isMentor && !isLoading"
           link
@@ -29,7 +31,7 @@
           :areas="mentor.areas"
         ></mentor-item>
       </ul>
-      <h3 v-else>No Mentors Found</h3>
+      <h3 v-else class="text-center">No Mentors Found</h3>
     </base-card>
   </section>
 </template>
@@ -67,7 +69,9 @@ export default {
       });
     },
     hasMentors() {
-      return this.$store.getters['mentors/hasMentors'];
+      // console.log(this.filteredMentors.length);
+      // return this.$store.getters['mentors/hasMentors'];
+      return this.filteredMentors.length;
     },
     isMentor() {
       return this.$store.getters['mentors/isMentor'];
@@ -77,10 +81,12 @@ export default {
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
-    async loadMentors() {
+    async loadMentors(forceRefresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('mentors/loadMentors');
+        await this.$store.dispatch('mentors/loadMentors', {
+          forceRefresh,
+        });
       } catch (err) {
         this.error = err.message || 'Something went wrong';
       }

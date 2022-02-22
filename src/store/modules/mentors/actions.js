@@ -32,7 +32,9 @@ export default {
       username,
     });
   },
-  async loadMentors(context) {
+  async loadMentors(context, payload) {
+    if (!payload?.forceRefresh && !context.getters.shouldUpdate) return;
+
     const response = await fetch(`${context.rootGetters.baseUrl}/mentors.json`);
     const responseData = await response.json();
     if (!response.ok) {
@@ -56,5 +58,6 @@ export default {
     }
 
     context.commit('setMentors', mentors);
+    context.commit('setFetchTimestamp');
   },
 };

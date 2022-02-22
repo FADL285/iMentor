@@ -26,6 +26,8 @@ export default {
     context.commit('addRequest', newRequest);
   },
   async fetchRequests(context) {
+    if (!context.getters.shouldUpdate) return;
+
     const mentorUsername = context.rootGetters.username;
     const response = await fetch(
       `${context.rootGetters.baseUrl}/requests/${mentorUsername}.json`
@@ -49,5 +51,6 @@ export default {
     }
 
     context.commit('setRequests', requests);
+    context.commit('setFetchTimestamp');
   },
 };
