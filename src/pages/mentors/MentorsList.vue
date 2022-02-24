@@ -29,9 +29,9 @@
           <mentor-item
             v-for="mentor in filteredMentors"
             :key="mentor.id"
+            :id="mentor.id"
             :first-name="mentor.firstName"
             :last-name="mentor.lastName"
-            :username="mentor.username"
             :bio="mentor.bio"
             :areas="mentor.areas"
           ></mentor-item>

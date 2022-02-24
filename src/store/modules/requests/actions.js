@@ -6,7 +6,7 @@ export default {
     };
 
     const response = await fetch(
-      `${context.rootGetters.baseUrl}/requests/${payload.mentorUsername}.json`,
+      `${context.rootGetters.databaseEndPoint}/requests/${payload.mentorId}.json`,
       {
         method: 'POST',
         body: JSON.stringify(newRequest),
@@ -21,16 +21,16 @@ export default {
     }
 
     newRequest.id = responseData.name;
-    newRequest.mentorUsername = payload.mentorUsername;
+    newRequest.mentorId = payload.mentorId;
 
     context.commit('addRequest', newRequest);
   },
   async fetchRequests(context) {
     if (!context.getters.shouldUpdate) return;
 
-    const mentorUsername = context.rootGetters.username;
+    const mentorId = context.rootGetters.userId;
     const response = await fetch(
-      `${context.rootGetters.baseUrl}/requests/${mentorUsername}.json`
+      `${context.rootGetters.databaseEndPoint}/requests/${mentorId}.json`
     );
     const responseData = await response.json();
 
@@ -43,7 +43,7 @@ export default {
     for (const key in responseData) {
       const request = {
         id: key,
-        mentorUsername,
+        mentorId,
         userEmail: responseData[key].userEmail,
         message: responseData[key].message,
       };

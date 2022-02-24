@@ -1,8 +1,7 @@
 export default {
   async registerMentor(context, payload) {
-    const username = context.rootGetters.username;
+    const id = context.rootGetters.userId;
     const mentorData = {
-      id: Math.round(new Date().getTime() * Math.random()),
       firstName: payload.first,
       lastName: payload.last,
       bio: payload.bio,
@@ -11,7 +10,7 @@ export default {
     };
 
     const response = await fetch(
-      `${context.rootGetters.baseUrl}/mentors/${username}.json`,
+      `${context.rootGetters.databaseEndPoint}/mentors/${id}.json`,
       {
         method: 'PUT',
         body: JSON.stringify(mentorData),
@@ -28,13 +27,15 @@ export default {
 
     context.commit('registerMentor', {
       ...mentorData,
-      username,
+      id,
     });
   },
   async loadMentors(context, payload) {
     if (!payload?.forceRefresh && !context.getters.shouldUpdate) return;
 
-    const response = await fetch(`${context.rootGetters.baseUrl}/mentors.json`);
+    const response = await fetch(
+      `${context.rootGetters.databaseEndPoint}/mentors.json`
+    );
     const responseData = await response.json();
     if (!response.ok) {
       //  Error Handling
@@ -44,9 +45,8 @@ export default {
     const mentors = [];
     for (const key in responseData) {
       const mentor = {
-        username: key,
+        id: key,
         // ...responseData[key],
-        id: responseData[key].id,
         firstName: responseData[key].firstName,
         lastName: responseData[key].lastName,
         bio: responseData[key].bio,

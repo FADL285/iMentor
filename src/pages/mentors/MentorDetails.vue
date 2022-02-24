@@ -37,7 +37,7 @@ export default {
       selectedMentor: null,
     };
   },
-  props: ['username'],
+  props: ['userId'],
   computed: {
     fullName() {
       return this.selectedMentor.firstName + ' ' + this.selectedMentor.lastName;
@@ -46,14 +46,14 @@ export default {
       return {
         name: 'mentor-contact',
         props: {
-          username: this.username,
+          userId: this.userId,
         },
       };
     },
   },
   created() {
     this.selectedMentor = this.$store.getters['mentors/mentors'].find(
-      (mentor) => mentor.username === this.username
+      (mentor) => mentor.id === this.userId
     );
   },
 };

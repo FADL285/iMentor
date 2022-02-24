@@ -1,24 +1,27 @@
 import { createStore } from 'vuex';
 import mentors from '@/store/modules/mentors';
 import requests from '@/store/modules/requests';
+import auth from '@/store/modules/auth';
 
 const store = createStore({
   modules: {
+    auth,
     mentors,
     requests,
   },
   state() {
     return {
-      username: 'test_user',
-      baseUrl: 'https://find-a-mentor-f923a-default-rtdb.firebaseio.com',
+      databaseEndPoint:
+        'https://find-a-mentor-f923a-default-rtdb.firebaseio.com',
+      authEndPoint: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${process.env.FIREBASE_API_KEY}`,
     };
   },
   getters: {
-    username(state) {
-      return state.username;
+    databaseEndPoint(state) {
+      return state.databaseEndPoint;
     },
-    baseUrl(state) {
-      return state.baseUrl;
+    authEndPoint(state) {
+      return state.databaseEndPoint;
     },
   },
 });

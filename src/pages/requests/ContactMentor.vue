@@ -46,7 +46,7 @@ export default {
       if (!this.isValidForm) return;
 
       this.$store.dispatch('requests/contactMentor', {
-        mentorUsername: this.$route.params.username,
+        mentorId: this.$route.params.userId,
         email: this.email,
         message: this.message,
       });

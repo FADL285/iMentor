@@ -7,9 +7,9 @@ export default {
   },
   isMentor(state, getters, rootState, rootGetters) {
     const mentors = getters.mentors;
-    const username = rootGetters.username;
+    const id = rootGetters.userId;
 
-    return mentors.some((mentor) => mentor.username === username);
+    return mentors.some((mentor) => mentor.id === id);
   },
   shouldUpdate(state) {
     const lastFetch = state.lastFetch;

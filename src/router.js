@@ -13,7 +13,7 @@ const router = createRouter({
     { path: '/', redirect: { name: 'mentors' } },
     { path: '/mentors', name: 'mentors', component: MentorsList },
     {
-      path: '/mentors/:username',
+      path: '/mentors/:userId',
       name: 'mentor',
       component: MentorDetails,
       props: true,

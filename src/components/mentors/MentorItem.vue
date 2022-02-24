@@ -25,9 +25,9 @@
 export default {
   name: 'MentorItem',
   props: {
+    id: String,
     firstName: String,
     lastName: String,
-    username: String,
     bio: String,
     areas: Array,
   },
@@ -39,7 +39,7 @@ export default {
       return {
         name: 'mentor-contact',
         params: {
-          username: this.username,
+          userId: this.id,
         },
       };
     },
@@ -47,7 +47,7 @@ export default {
       return {
         name: 'mentor',
         params: {
-          username: this.username,
+          userId: this.id,
         },
       };
     },
