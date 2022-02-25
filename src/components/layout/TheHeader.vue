@@ -30,13 +30,19 @@
         <li>
           <router-link :to="{ name: 'mentors' }"> All Mentors </router-link>
         </li>
-        <!--        <li v-if="!isMentor">-->
-        <!--          <index-link :to="{ name: 'mentor-register' }">-->
-        <!--            Become a Mentor-->
-        <!--          </index-link>-->
-        <!--        </li>-->
-        <li>
+        <li v-if="isLoggedIn && !isMentor">
+          <router-link :to="{ name: 'mentor-register' }">
+            Become a Mentor
+          </router-link>
+        </li>
+        <li v-if="isLoggedIn">
           <router-link :to="{ name: 'requests' }"> Requests</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logout">Logout</base-button>
+        </li>
+        <li v-else>
+          <router-link :to="{ name: 'auth' }"> Login / Signup</router-link>
         </li>
       </ul>
     </nav>
@@ -47,8 +53,17 @@
 export default {
   name: 'TheHeader',
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     isMentor() {
       return this.$store.getters['mentors/isMentor'];
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.replace({ name: 'mentors' });
     },
   },
 };

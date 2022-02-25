@@ -13,9 +13,14 @@
       ></base-badge>
     </div>
     <div class="actions">
-      <base-button link :to="mentorContactLink" mode="flat"
-        >Contact</base-button
+      <base-button
+        v-if="!isCurrentUserProfile"
+        link
+        :to="mentorContactLink"
+        mode="flat"
       >
+        Contact
+      </base-button>
       <base-button link :to="mentorDetailsLink">View Details</base-button>
     </div>
   </li>
@@ -50,6 +55,9 @@ export default {
           userId: this.id,
         },
       };
+    },
+    isCurrentUserProfile() {
+      return this.$store.getters.userId === this.id;
     },
   },
 };

@@ -17,7 +17,11 @@
           <base-button
             v-if="!isMentor && !isLoading"
             link
-            :to="{ name: 'mentor-register' }"
+            :to="
+              isLoggedIn
+                ? { name: 'mentor-register' }
+                : { name: 'auth', query: { redirect: 'mentor-register' } }
+            "
           >
             Become a Mentor
           </base-button>
@@ -62,6 +66,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     filteredMentors() {
       const mentors = this.$store.getters['mentors/mentors'];
       return mentors.filter((mentor) => {

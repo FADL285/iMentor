@@ -86,6 +86,8 @@ export default {
             password: this.password,
           });
         }
+        const redirectTo = this.$route.query.redirect || 'mentors';
+        await this.$router.replace({ name: redirectTo });
       } catch (error) {
         this.error = error.message || 'Failed to signup try letter';
       }
