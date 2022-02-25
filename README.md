@@ -9,6 +9,9 @@ Simple Vue App -> Find a Mentor
 npm install
 ```
 
+## Add your API Key
+copy .env.example to .env file and add your firestore api key
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

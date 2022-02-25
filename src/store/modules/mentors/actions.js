@@ -9,8 +9,10 @@ export default {
       areas: payload.areas,
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `${context.rootGetters.databaseEndPoint}/mentors/${id}.json`,
+      `${context.rootGetters.databaseEndPoint}/mentors/${id}.json?auth=${token}`,
       {
         method: 'PUT',
         body: JSON.stringify(mentorData),
@@ -22,7 +24,7 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(responseData.message || 'Failed to send data');
+      throw new Error(responseData.error.message || 'Failed to send data');
     }
 
     context.commit('registerMentor', {
@@ -39,7 +41,7 @@ export default {
     const responseData = await response.json();
     if (!response.ok) {
       //  Error Handling
-      throw new Error(responseData.message || 'Failed to get data');
+      throw new Error(responseData.error.message || 'Failed to get data');
     }
 
     const mentors = [];

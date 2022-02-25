@@ -6,7 +6,9 @@ export default {
   // namespaced: true,
   state() {
     return {
-      userId: 'fadl285',
+      userId: null,
+      token: null,
+      tokenExpiration: null,
     };
   },
   getters,

@@ -17,7 +17,7 @@ export default {
     console.log(response);
     if (!response.ok) {
       //  Error Handling
-      throw new Error(responseData.message || 'Failed to send request');
+      throw new Error(responseData.error.message || 'Failed to send request');
     }
 
     newRequest.id = responseData.name;
@@ -29,13 +29,14 @@ export default {
     if (!context.getters.shouldUpdate) return;
 
     const mentorId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `${context.rootGetters.databaseEndPoint}/requests/${mentorId}.json`
+      `${context.rootGetters.databaseEndPoint}/requests/${mentorId}.json?auth=${token}`
     );
     const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(responseData.message || 'Failed to get requests');
+      throw new Error(responseData.error.message || 'Failed to get requests');
     }
 
     const requests = [];

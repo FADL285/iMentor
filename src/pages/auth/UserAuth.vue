@@ -1,39 +1,51 @@
 <template>
-  <form @submit.prevent="submitForm" novalidate>
+  <div>
+    <base-dialog
+      :show="!!error"
+      title="An error occurred!"
+      @close="handleError"
+    >
+      {{ error }}
+    </base-dialog>
+    <base-dialog :show="isLoading" title="Authenticating..." fixed>
+      <base-spinner></base-spinner>
+    </base-dialog>
     <base-card>
-      <div class="form-control">
-        <label for="email">E-Mail</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          v-model.trim="email"
-          ref="email"
-          required
-        />
-      </div>
-      <div class="form-control">
-        <label for="password">E-Mail</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          v-model.trim="password"
-        />
-      </div>
-      <p v-if="!isValidForm" class="errors">
-        Please Enter a valid email & password must be at least 7 characters
-      </p>
-      <base-button class="capitalize">{{ mode }}</base-button>
-      <base-button
-        type="button"
-        mode="flat"
-        @click="switchAuthMode"
-        class="capitalize"
-        >{{ switchAuthModeButtonCaption }}</base-button
-      >
+      <form @submit.prevent="submitForm" novalidate>
+        <div class="form-control">
+          <label for="email">E-Mail</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            v-model.trim="email"
+            ref="email"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            v-model.trim="password"
+          />
+        </div>
+        <p v-if="!isValidForm" class="errors">
+          Please Enter a valid email & password must be at least 7 characters
+        </p>
+        <base-button type="submit" class="capitalize">{{ mode }}</base-button>
+        <base-button
+          type="button"
+          mode="flat"
+          @click="switchAuthMode"
+          class="capitalize"
+          >{{ switchAuthModeButtonCaption }}</base-button
+        >
+      </form>
     </base-card>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -45,6 +57,8 @@ export default {
       password: '',
       isValidForm: true,
       mode: 'login',
+      isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -53,13 +67,29 @@ export default {
     },
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       this.isValidForm =
         this.$refs.email.checkValidity() && this.password.length > 6;
 
       if (!this.isValidForm) return;
 
-      console.log('login');
+      this.isLoading = true;
+      try {
+        if (this.mode === 'login') {
+          await this.$store.dispatch('login', {
+            email: this.email,
+            password: this.password,
+          });
+        } else {
+          await this.$store.dispatch('signup', {
+            email: this.email,
+            password: this.password,
+          });
+        }
+      } catch (error) {
+        this.error = error.message || 'Failed to signup try letter';
+      }
+      this.isLoading = false;
     },
     switchAuthMode() {
       if (this.mode === 'login') {
@@ -67,6 +97,9 @@ export default {
       } else {
         this.mode = 'login';
       }
+    },
+    handleError() {
+      this.error = null;
     },
   },
 };

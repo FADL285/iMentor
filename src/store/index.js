@@ -13,15 +13,19 @@ const store = createStore({
     return {
       databaseEndPoint:
         'https://find-a-mentor-f923a-default-rtdb.firebaseio.com',
-      authEndPoint: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${process.env.FIREBASE_API_KEY}`,
+      signupEndPoint: `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.VUE_APP_FIREBASE_API_KEY}`,
+      loginEndPoint: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FIREBASE_API_KEY}`,
     };
   },
   getters: {
     databaseEndPoint(state) {
       return state.databaseEndPoint;
     },
-    authEndPoint(state) {
-      return state.databaseEndPoint;
+    signupEndPoint(state) {
+      return state.signupEndPoint;
+    },
+    loginEndPoint(state) {
+      return state.loginEndPoint;
     },
   },
 });
