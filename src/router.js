@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MentorsList from '@/pages/mentors/MentorsList';
 // import MentorDetails from '@/pages/mentors/MentorDetails';
-const MentorDetails = () => require('@/pages/mentors/MentorDetails');
+const MentorDetails = () => import('@/pages/mentors/MentorDetails');
 // import ContactMentor from '@/pages/requests/ContactMentor';
-const ContactMentor = () => require('@/pages/requests/ContactMentor');
+const ContactMentor = () => import('@/pages/requests/ContactMentor');
 // import MentorRegistration from '@/pages/mentors/MentorRegistration';
 const MentorRegistration = () => import('@/pages/mentors/MentorRegistration');
 // import RequestsReceived from '@/pages/requests/RequestsReceived';
