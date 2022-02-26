@@ -61,4 +61,28 @@ export default {
     context.commit('setMentors', mentors);
     context.commit('setFetchTimestamp');
   },
+  async loadMentor(context, payload) {
+    if (context.getters.mentors.length !== 0) {
+      const selectedMentor = context.getters.mentors.find(
+        (mentor) => mentor.id === payload.id
+      );
+      context.commit('setMentor', selectedMentor);
+    } else {
+      const response = await fetch(
+        `${context.rootGetters.databaseEndPoint}/mentors/${payload.id}.json`
+      );
+      const responseData = await response.json();
+      if (!response.ok) {
+        //  Error Handling
+        throw new Error(responseData.error.message || 'Failed to get data');
+      }
+
+      if (!responseData) return;
+
+      context.commit('setMentor', {
+        ...responseData,
+        id: payload.id,
+      });
+    }
+  },
 };

@@ -2,6 +2,9 @@ export default {
   mentors(state) {
     return state.mentors;
   },
+  mentor(state) {
+    return state.mentor;
+  },
   hasMentors(state) {
     return !!state.mentors?.length;
   },

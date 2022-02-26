@@ -5,6 +5,9 @@ export default {
   setMentors(state, payload) {
     state.mentors = payload;
   },
+  setMentor(state, payload) {
+    state.mentor = payload;
+  },
   setFetchTimestamp(state) {
     state.lastFetch = new Date().getTime();
   },

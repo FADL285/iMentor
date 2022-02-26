@@ -17,6 +17,19 @@ export default {
   computed: {
     ...mapGetters(['didAutoLogout']),
   },
+  methods: {
+    async loadMentors(forceRefresh = false) {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('mentors/loadMentors', {
+          forceRefresh,
+        });
+      } catch (err) {
+        this.error = err.message || 'Something went wrong';
+      }
+      this.isLoading = false;
+    },
+  },
   watch: {
     didAutoLogout(currentVal, oldVal) {
       if (currentVal && currentVal !== oldVal) {
@@ -26,6 +39,7 @@ export default {
   },
   created() {
     this.$store.dispatch('tryLogin');
+    this.loadMentors();
   },
 };
 </script>

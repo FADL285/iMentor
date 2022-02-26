@@ -30,15 +30,15 @@
 </template>
 
 <script>
+import store from '@/store';
+
 export default {
   name: 'MentorDetails',
-  data() {
-    return {
-      selectedMentor: null,
-    };
-  },
   props: ['userId'],
   computed: {
+    selectedMentor() {
+      return this.$store.getters['mentors/mentor'];
+    },
     fullName() {
       return this.selectedMentor.firstName + ' ' + this.selectedMentor.lastName;
     },
@@ -51,10 +51,23 @@ export default {
       };
     },
   },
-  created() {
-    this.selectedMentor = this.$store.getters['mentors/mentors'].find(
-      (mentor) => mentor.id === this.userId
-    );
+  async beforeRouteEnter(to) {
+    console.log('BeforeRouteEnter');
+
+    await store.dispatch('mentors/loadMentor', {
+      id: to.params.userId,
+    });
+    const mentor = store.getters['mentors/mentor'];
+
+    if (mentor && Object.keys(mentor).length === 0)
+      return {
+        name: 'NotFound',
+        // preserve current path and remove the first char to avoid the target URL starting with `//`
+        params: { notFound: to.path.substring(1).split('/') },
+        // preserve existing query and hash if any
+        query: to.query,
+        hash: to.hash,
+      };
   },
 };
 </script>
