@@ -1,11 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MentorsList from '@/pages/mentors/MentorsList';
-import MentorDetails from '@/pages/mentors/MentorDetails';
-import ContactMentor from '@/pages/requests/ContactMentor';
-import MentorRegistration from '@/pages/mentors/MentorRegistration';
-import RequestsReceived from '@/pages/requests/RequestsReceived';
-import NotFound from '@/pages/NotFound';
-import UserAuth from '@/pages/auth/UserAuth';
+// import MentorDetails from '@/pages/mentors/MentorDetails';
+const MentorDetails = () => require('@/pages/mentors/MentorDetails');
+// import ContactMentor from '@/pages/requests/ContactMentor';
+const ContactMentor = () => require('@/pages/requests/ContactMentor');
+// import MentorRegistration from '@/pages/mentors/MentorRegistration';
+const MentorRegistration = () => import('@/pages/mentors/MentorRegistration');
+// import RequestsReceived from '@/pages/requests/RequestsReceived';
+const RequestsReceived = () => import('@/pages/requests/RequestsReceived');
+// import UserAuth from '@/pages/auth/UserAuth';
+const UserAuth = () => import('@/pages/auth/UserAuth');
+// import NotFound from '@/pages/NotFound';
+const NotFound = () => import('@/pages/NotFound');
+
 // Vuex Store
 import store from '@/store';
 
