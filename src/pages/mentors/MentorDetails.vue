@@ -52,7 +52,7 @@ export default {
     },
   },
   async beforeRouteEnter(to) {
-    console.log('BeforeRouteEnter');
+    // console.log('BeforeRouteEnter');
 
     await store.dispatch('mentors/loadMentor', {
       id: to.params.userId,
